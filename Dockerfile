@@ -1,14 +1,14 @@
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin:21-jdk-alpine
 
 WORKDIR /app
 
 COPY . .
 
-# Install Maven inside container
-RUN apk add --no-cache maven
+# Give execution permission to mvnw
+RUN chmod +x mvnw
 
-# Build app using Maven
-RUN mvn clean package -DskipTests
+# Build the app
+RUN ./mvnw clean package -DskipTests
 
 EXPOSE 8080
 
