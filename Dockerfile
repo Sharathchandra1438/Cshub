@@ -4,7 +4,11 @@ WORKDIR /app
 
 COPY . .
 
-RUN ./mvnw clean package -DskipTests
+# Install Maven inside container
+RUN apk add --no-cache maven
+
+# Build app using Maven
+RUN mvn clean package -DskipTests
 
 EXPOSE 8080
 
